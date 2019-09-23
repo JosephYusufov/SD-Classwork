@@ -15,6 +15,16 @@ with open('./static/occupations.csv') as csv_file:  # open CSV file
         else:
             OCCUPATIONS[row[0]] = float(row[1])
 
+
+def selector():  # function to randomly select an occupation
+    randomValue = random.random() * 99.8  # Pick a random number from 0 to 99.8
+    threshold = 0
+    for x, y in OCCUPATIONS.items():
+        if(randomValue < threshold):
+            return(x, y)
+        else:
+            threshold += y
+
 @app.route("/")
 def hello_world():
     print(__name__)
@@ -27,8 +37,8 @@ def index():
 
 @app.route("/occupyflaskst")
 def test_tmplt():
-	return render_template("index.html", OCCUPATIONS=OCCUPATIONS)
-
+    selected = selector()
+    return render_template("index.html", OCCUPATIONS=OCCUPATIONS, selected=selected)
 
 if __name__ == "__main__":
     app.debug = True
