@@ -8,18 +8,27 @@ from flask import request
 from flask import session
 from flask import redirect
 import os
+import csv
 
 app = Flask(__name__) #create instance of class Flask
 app.secret_key = os.urandom(24)
 
+CREDENTIALS = {}
 
+with open('static/credentials.csv') as csv_file:  # open CSV file
+    # instantiate CSV reader object
+    csv_reader = csv.reader(csv_file, delimiter=',')
+    line_count = 0  # make sure header isn't included in dictionary
+    # print(csv_reader)
+    for row in csv_reader:  # populate dictionary with keys and values
+        if(line_count == 0):
+            line_count += 1
+        else:
+            CREDENTIALS[row[0]] = row[1]
+# print(CREDENTIALS)
 
 @app.route('/')  #  Login Page
 def index():
-    file = open("static/credentials.csv", 'r')
-    print(file.readlines())
-    valid_username = "Moseph"
-    valid_password = "amagoog"
     return render_template("landingpage.html")
 
 
@@ -28,15 +37,16 @@ def authentication():
     """
     This only accepts GET requests
     """
-    print("\n" + "BODY OF REQUEST :: " + str(request))
-    print("REQUEST ARGS :: " + str(request.args)+ "\n")
+    # print("\n" + "BODY OF REQUEST :: " + str(request))
+    # print("REQUEST ARGS :: " + str(request.args)+ "\n")
 
     if request.args.get('username'):  # if the form was filled out
         session['user'] = request.args.get('username')  # start a session, and populate the dictionary with the given username
-
-    if 'user' in session:  #  If the session dictionaty does in fact have a user in it.
-        return render_template("responsepage.html", login_info=session, method_type=request.method)  # load the template with the user's session info
-
+        session['password'] = request.args.get('password')
+    if 'user' in session:  #  If the session dictionary does in fact have a user in it.
+        if session.get("user") == CREDENTIALS.get('user') and session.get("password") == CREDENTIALS.get('password'):# load the template with the user's session info
+            return render_template("responsepage.html", login_info=session, method_type=request.method)        
+        return render_template("landingpage.html", invalidlogin_error = "Invalid Credentials")
     return redirect('/')  #  Otherwise let the user know that they have not logged in
 
 
@@ -46,6 +56,8 @@ def logout():
     return render_template("logout.html")
 
 
+
+print(CREDENTIALS)
 if __name__ == "__main__":
     app.debug = True
     app.run()
