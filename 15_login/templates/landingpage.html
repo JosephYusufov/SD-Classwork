@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Form </title>
+  </head>
+  <body>
+    <h1>Team Ama-Goog </h1>
+    <br>
+    <h1>Mohidul Abedin and Tyler Huang</h1>
+    {%if error_msg%}
+        {{error_msg}}
+    {%endif%}
+
+    <form action = "/auth">
+      Enter your username:
+      <input type = "text" name = "username"> <br>
+      <input type = "submit" name = "sub1"> <br>
+    </form>
+  </body>
+</html>
