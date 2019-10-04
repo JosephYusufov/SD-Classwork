@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+        {% block title %}
+            Welcome
+        {% endblock %}
+    </title>
+  </head>
+  <body>
+    {% block content %}
+        {%if invalidlogin_error%}
+            {{invalidlogin_error}}
+        {%endif%}
+        <form action = "/auth">
+                Enter your username:
+            <input type = "text" name = "username" required> <br>
+                Enter your password:
+            <input type="password" name="password" required> <br>
+            <input type = "submit" name = "sub1"> <br>
+        </form>
+    {% endblock %}
+  </body>
+</html>
