@@ -1,6 +1,7 @@
-# Team Tuvalu
+# Team Ama-goog
 # Joseph Yusufov
-# 2019-09-28
+# Mohidul Abedin
+# 2019-10-04
 
 from flask import Flask
 from flask import render_template
@@ -15,6 +16,9 @@ app.secret_key = os.urandom(24)
 
 CREDENTIALS = {}
 
+"""
+USERNAME and PASSWORD ARE STORED IN static/credentials.csv
+"""
 with open('static/credentials.csv') as csv_file:  # open CSV file
     # instantiate CSV reader object
     csv_reader = csv.reader(csv_file, delimiter=',')
@@ -29,8 +33,9 @@ with open('static/credentials.csv') as csv_file:  # open CSV file
 
 @app.route('/')  #  Login Page
 def index():
-    return render_template("landingpage.html")
-
+    if session.get("user") == CREDENTIALS.get('user') and session.get("password") == CREDENTIALS.get('password'):# load the template with the user's session info
+        return redirect('/auth')        
+    return render_template('landingpage.html')
 
 @app.route("/auth")
 def authentication():
@@ -46,7 +51,10 @@ def authentication():
     if 'user' in session:  #  If the session dictionary does in fact have a user in it.
         if session.get("user") == CREDENTIALS.get('user') and session.get("password") == CREDENTIALS.get('password'):# load the template with the user's session info
             return render_template("responsepage.html", login_info=session, method_type=request.method)        
-        return render_template("landingpage.html", invalidlogin_error = "Invalid Credentials")
+        elif session.get('password') != CREDENTIALS.get('password'):
+            return render_template("landingpage.html", invalidlogin_error = "Invalid Password")
+        else: 
+            return render_template("landingpage.html", invalidlogin_error = "Invalid Username")
     return redirect('/')  #  Otherwise let the user know that they have not logged in
 
 
