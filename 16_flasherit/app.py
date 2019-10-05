@@ -59,7 +59,7 @@ def authentication():
         else:
             flash("Invalid Password")
             return redirect(url_for('index'))
-
+    return redirect(url_for('index'))
 
 @app.route('/logout')  #  Logout removes the User's session from the dictionary stored on the server, even if the cookie still exists
 def logout():
