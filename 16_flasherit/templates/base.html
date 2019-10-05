@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <head>
   {% block head %}
-  <title> {% block title %} {% endblock %}
-    -|- My First Page
-  </title>
+    {% block style %}
+      <style>
+      </style>
+    {% endblock %}
+    <title> {% block title %} {% endblock %}
+      -|- My First Page
+    </title>
   {% endblock %}
 </head>
 <body>
