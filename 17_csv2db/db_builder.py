@@ -9,11 +9,13 @@ import csv       #facilitate CSV I/O
 STUDENTS = {} # Dictionary to hold a dictionary for each student
 COURSES = {}  # Dictionary to hold a dictionary for each course
 
-DB_FILE="discobandit.db"
+DB_FILE = "discobandit.db"
 
 db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
 c = db.cursor()               #facilitate db ops
 
+
+# < < < INSERT YOUR POPULATE-THE-DB CODE HERE > > >
 
 insert_data_student = ""
 with open('students.csv', newline='') as csvfile:
@@ -30,22 +32,7 @@ with open('courses.csv', newline='') as csvfile:
         insert_data_courses += "INSERT INTO courses VALUES('" + row['code'] + "'," + row['mark'] + ", " + row['id'] + ");\n"
 print(insert_data_courses)
 
-
 #==========================================================
-
-# < < < INSERT YOUR POPULATE-THE-DB CODE HERE > > >
-# insert_data_student = "" # generate the SQL script to be ran, reading from the STUDENTS dictionary as populated above
-# for student in STUDENTS:
-#     insert_data_student += "INSERT INTO student VALUES('" + STUDENTS[student]['name'] + "'," + STUDENTS[student]['age'] + ", " + student + ");\n"
-# print(insert_data_student)
-#
-# print('\n \n')
-# # generate the SQL script to be ran, reading from the STUDENTS dictionary as populated above
-# insert_data_courses = ""
-# for course in COURSES:
-#     insert_data_courses += "INSERT INTO courses VALUES('" + COURSES[course]['code'] + "'," + COURSES[course]['mark'] + ", " + course + ");\n"
-# print(insert_data_courses)
-
 
 # test SQL stmt in sqlite3 shell, save as string
 create_student = "CREATE TABLE student( name TEXT, age INTEGER, student_id INTEGER PRIMARY KEY);"
@@ -54,7 +41,6 @@ c.executescript(create_student)    # run SQL statement
 c.executescript(insert_data_student)    # run SQL statement
 c.executescript(create_courses)    # run SQL statement
 c.executescript(insert_data_courses)    # run SQL statement
-
 
 #==========================================================
 
