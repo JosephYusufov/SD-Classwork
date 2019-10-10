@@ -1,13 +1,10 @@
-#Joseph Yusufov, With a skeleton provided by Mr. Mykolyk
+#Joseph Yusufov, Hillary Zen, With a skeleton provided by Mr. Mykolyk
 #SoftDev
 #skeleton :: SQLITE3 BASICS
-#Oct 10 2019
+#Oct 11 2019
 
 import sqlite3   #enable control of an sqlite database
 import csv       #facilitate CSV I/O
-
-STUDENTS = {} # Dictionary to hold a dictionary for each student
-COURSES = {}  # Dictionary to hold a dictionary for each course
 
 DB_FILE = "discobandit.db"
 
