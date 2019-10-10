@@ -1,3 +1,6 @@
+# database files that get corrupted when version-tracked
+*.db
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
