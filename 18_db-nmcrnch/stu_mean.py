@@ -10,13 +10,19 @@ DB_FILE = "discobandit.db"
 
 db = sqlite3.connect(DB_FILE)  # open if file exists, otherwise create
 c = db.cursor()  # facilitate db ops
-print_student = "SELECT * FROM student;" 
-print_courses = "SELECT * FROM courses;"
+print_student = "SELECT * FROM student;"
+select_courses_frag = "SELECT mark FROM courses WHERE id == " 
+# print_courses = "SELECT * FROM courses;"
 
 student_toprint = c.execute(print_student)
 for member in student_toprint:
-    print(member)
+    print("---")
+    # print(member[2])
+    print(c.execute(select_courses_frag + str(member[2]) + ';' )) # Needs a nested for loop, and more revision. 
+    print("---")
 
-courses_toprint = c.execute(print_courses)
-for member in courses_toprint:
-    print(member)
+    
+
+# courses_toprint = c.execute(print_courses)
+# for member in courses_toprint:
+#     print(member)

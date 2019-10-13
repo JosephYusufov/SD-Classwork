@@ -32,8 +32,8 @@ print(insert_data_courses)
 #==========================================================
 
 # test SQL stmt in sqlite3 shell, save as string
-create_student = "CREATE TABLE student( name TEXT, age INTEGER, student_id INTEGER PRIMARY KEY);"
-create_courses = "CREATE TABLE courses( code TEXT, mark INTEGER, course_id INTEGER );"
+create_student = "CREATE TABLE student( name TEXT, age INTEGER, id INTEGER PRIMARY KEY);"
+create_courses = "CREATE TABLE courses( code TEXT, mark INTEGER, id INTEGER );"
 c.executescript(create_student)    # run SQL statement
 c.executescript(insert_data_student)    # run SQL statement
 c.executescript(create_courses)    # run SQL statement
