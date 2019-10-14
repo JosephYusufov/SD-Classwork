@@ -1,7 +1,7 @@
 #Joseph Yusufov, Hillary Zen, With a skeleton provided by Mr. Mykolyk
 #SoftDev
 #skeleton :: SQLITE3 BASICS
-#Oct 11 2019
+#Oct 15 2019
 
 import sqlite3   #enable control of an sqlite database
 import csv       #facilitate CSV I/O
@@ -34,10 +34,12 @@ print(insert_data_courses)
 # test SQL stmt in sqlite3 shell, save as string
 create_student = "CREATE TABLE student( name TEXT, age INTEGER, id INTEGER PRIMARY KEY);"
 create_courses = "CREATE TABLE courses( code TEXT, mark INTEGER, id INTEGER );"
+create_average = "CREATE TABLE stu_avg( id INTEGER PRIMARY KEY, average REAL );"
 c.executescript(create_student)    # run SQL statement
 c.executescript(insert_data_student)    # run SQL statement
 c.executescript(create_courses)    # run SQL statement
 c.executescript(insert_data_courses)    # run SQL statement
+c.executescript(create_average)    # run SQL statement
 
 #==========================================================
 
