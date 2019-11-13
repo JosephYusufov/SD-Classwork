@@ -16,8 +16,8 @@ def hello_world():
         "https://api.nasa.gov/planetary/apod?api_key=tSwi6wYGUCb8vdzY9VMiCu0au0FcaA8foOpsh98y"
     )
     data = json.loads(r.data)
-    print(data[url])
-    return render_template("index.html", pic = data[url])
+    print(data['url'])
+    return render_template("index.html", data = data)
 
 if __name__ == "__main__":
     app.debug = True
