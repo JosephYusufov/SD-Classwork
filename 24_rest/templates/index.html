@@ -5,8 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>NASA Pic</title>
+        <!-- Compressed CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
+
 </head>
 <body>
-    <img src="{{pic}}" alt="no picture">
+    <div class="grid-container fluid">
+        <h1>{{data['title']}} -- {{data['date']}}</h1>
+        <img src="{{data['url']}}" alt="no picture">
+        <p>{{data['explanation']}}</p>
+    </div>
+
+    <!-- Compressed JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
 </body>
 </html>
