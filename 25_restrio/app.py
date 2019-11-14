@@ -40,6 +40,20 @@ def citi():
     # print(station)
     return render_template("citi.html", data=station)
 
+
+@app.route("/clash")
+def clash():
+    r = urllib.request.urlopen(
+        "http://api.citybik.es/v2/networks"
+    )
+    response = json.loads(r.read())
+    data = response['networks']
+    # print(data)
+    # print(data['results'][0]['name'])
+    station = random.choice(list(data))
+    # print(station)
+    return render_template("citi.html", data=station)
+
 if __name__ == "__main__":
     app.debug = True
     app.run()
