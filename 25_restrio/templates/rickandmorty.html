@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        h4{
+            text-indent: 3em;
+        }
+
+        .info{
+            display: inline-block;
+            margin-left: 20px;
+        }
+
+        button{
+            height: 50px;
+            margin: 10px 0;
+        }
+    </style>
+    <title>Rick and Morty</title>
+</head>
+<body>
+    <a href="/"> <button>Back Home</button> </a>
+    <br>
+    {% for member in data['results']: %}
+    <div>
+        <img src="{{member['image']}}" alt="image" style="display: inline-block;">
+        <div class="info">
+            <h3>{{member['name']}}</h3>
+            <h4>    {{member['status']}}</h4>
+            <h4>    {{member['species']}}</h4>
+            <h4>    {{member['gender']}}</h4>
+            <h4>    {{member['origin']['name']}}</h4>
+        </div>
+        <hr>
+        <br>
+    </div>
+    {% endfor %}
+</body>
+</html>

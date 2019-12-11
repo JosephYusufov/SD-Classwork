@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        h4 {
+            text-indent: 3em;
+        }
+
+        .info {
+            display: inline-block;
+            margin-left: 20px;
+        }
+
+        button {
+            height: 50px;
+            margin: 10px 0;
+        }
+    </style>
+    <title>Citibike</title>
+</head>
+
+<body>
+    <a href="/"> <button>Back Home</button> </a>
+    <br>
+    <div>
+        <div class="info">
+            <h3>{{data['name']}}</h3>
+            <h4>{{data['location']['city']}}, {{data['location']['country']}}</h4>
+            <a href="/citi"> <button>Retrieve Another</button> </a>
+        </div>
+        <hr>
+        <br>
+    </div>
+</body>
+
+</html>
