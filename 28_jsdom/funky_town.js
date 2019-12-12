@@ -84,13 +84,14 @@ var studentButton = document.getElementById("studentButton").addEventListener("c
 );
 
 var gcdButton = document.getElementById("gcdButton").addEventListener("click",
-    function gcdB(){
+    function gcdB(e){
       var number0 = parseInt(document.getElementById("gcdInput0").value);
       var number1 = parseInt(document.getElementById("gcdInput1").value);
       console.log(gcd(number0, number1));
       document.getElementById("gcdAnswer").innerHTML = gcd(number0, number1);
       document.getElementById("gcdAnswer").style.color = "green";
       document.getElementById("gcdA").style.color = "green";
+      console.log(e);
       return gcd(number0, number1);
     }
 );
