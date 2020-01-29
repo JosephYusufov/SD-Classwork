@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- Compressed CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css" >
+
+</head>
+<body>
+    <div id="top" class="sticky" data-sticky-container>
+        <div class="title-bar" style="background-color:rgb(4, 141, 84) ;"data-sticky data-options="marginTop:0;" style="width:100%">
+            <div class="title-bar-left">
+                <h3 class="text-center">Foundation Web Framework Tutorial</h3>
+            </div>
+            <div class="title-bar-right">
+              <img src="https://foundation.zurb.com/assets/img/learn/features/svgs/code-reduction-01.svg" alt="Zurb?" style="height: 3.5em;">
+              <h3 style="display: inline-block;"> <small> Joseph Yusufov and David Wang</small> </h3> 
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="grid-container">
+        <div class="grid-y">
+          <div class="intro">
+            <h3> Welcome to Foundation! <small><a href="https://foundation.zurb.com/sites/docs/">Official docs</a></small></h3>
+            <p> Foundation is a front end framework that allows web developers to create responsive, comprehensive websites.</p>
+            <p> We have used a <a href = "https://www.webopedia.com/TERM/C/CDN.html">CDN link</a> in our <code>code</code> to link an external stylesheet
+              hosted by <a href="https://www.jsdelivr.com">jsdelivr</a>.</p>
+            <p> Come and bolster your web development <i>foundation</i>!</p>
+            <hr>
+          </div>
+            <div class="typography">
+                <h3 style="display: inline-block;"> <b>Typography</b> </h3> <a href="#top" class="button" style="float: right;">Back to Top</a>
+                <ul>
+                    <p>The Foundation Framework offers many different options for typography, with varying sizes, colors, and weights of fonts.</p>
+                    <h1>Heading 1 <small>Small Header</small></h1>
+                    <h2>Heading 2 <small>Small Header</small></h2>
+                    <h3>Heading 3 <small>Small Header</small></h3>
+                    <h4>Heading 4 <small>Small Header</small></h4>
+                    <h5>Heading 5 <small>Small Header</small></h5>
+                    <h6>Heading 6 <small>Small Header</small></h6>
+                    <p>Measley little paragraph.</p>
+                </ul>
+            <hr>
+            </div>
+            <div class="grid-layout">
+                <h3 style="display: inline-block;"> <b>Layout</b> </h3> <a href="#top" class="button" style="float: right;">Back to Top</a>
+                <p>Layout in Foundation 6 is done using containers, which are adaptive elements that change in size as the viewport changes.
+                  The main component of layout in Foundation 6 is the X-Y grid, which allows the user to set columns and rows with responsive widths,
+                  add gutters and padding, and allocate space on the screen as they see fit.</p>
+                <div class="grid-container" style="background-color: lightblue;">
+                  <h5 style="color:white;">A grid container</h5>
+                </div>
+                <div class="grid-container">
+                    <h4 class="" >Grid with Padding</h4>
+                    <div class="grid-x grid-padding-x">
+                        <h4 class="cell medium-6" style="background: lightblue; color:white;">first section</h4>
+                        <h4 class="cell medium-2" style="background: red; color:white;">second section</h4>
+                        <h4 class="cell medium-2" style="background: green; color:white;">third section</h4>
+                    </div>
+                    <br>
+                    <h4 class="" >Grid with Margins</h4>
+                    <div class="grid-x grid-margin-x">
+                            <h4 class="cell medium-6" style="background: lightblue; color:white;">first section</h4>
+                            <h4 class="cell medium-2" style="background: red; color:white;">second section</h4>
+                            <h4 class="cell medium-2" style="background: green; color:white;">third section</h4>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div class="controls">
+              <h3 style="display: inline-block;"> <b>Controls</b> </h3> <a href="#top" class="button" style="float: right;">Back to Top</a>
+              <p>Buttons, switches, and sliders (JavaScript based) are three of the options for controls that Foundation offers.</p>
+              <p>Buttons contain links to other pages or a different section of the same page.</p>
+              <a href="#top" class="button">Example button to top of page</a>
+              <a href="https://foundation.zurb.com/sites/docs/button.html" class="button">Example button to offical documentation on buttons</a>
+              <p>Buttons can also come in different flavors, for example:</p>
+              <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank"class="button large large-expanded alert">A Big Bad Red button (Where does it go???)</a>
+              <a href="https://www.youtube.com/watch?v=vSHPkq6aYSs" target="_blank"class="button large large-expanded success">A Nice Large Green Button (Where does it go???)</a>
+              <br>
+              <br>
+              <br>
+              <p>How about a switch or two? They're like Binary Feedback Devices, except on your komputar... They are excellent for collecting answers to binary questions.</p>
+              <div class="switch">
+                  <input class="switch-input" id="exampleSwitch" type="checkbox" name="exampleSwitch">
+                  <label class="switch-paddle" for="exampleSwitch">
+                    <span class="show-for-sr">Hey! Teachers! Leave us kids alone!</span>
+                  </label>
+              </div>
+              <p>Aren't These Fun?</p>
+              <div class="switch large">
+                <input class="switch-input" id="yes-no" type="checkbox" name="exampleSwitch">
+                <label class="switch-paddle" for="yes-no">
+                  <span class="show-for-sr">Aren't These Fun?</span>
+                  <span class="switch-active" aria-hidden="true">Yes</span>
+                  <span class="switch-inactive" aria-hidden="true">No</span>
+                </label>
+              </div>
+              <hr>
+            </div>
+            <div class="end">
+              <h3 style="display: inline-block;" class="text-center"> <i>fin</i> </h3> <a href="#top" class="button" style="float: right;">Back to Top</a>
+              <div class="media-object">
+                <img class="" src="https://media3.giphy.com/media/d2jjIRvGomz6GMkU/source.gif" alt="Larry David >>>">
+              </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
+    <!-- Compressed JavaScript -->
+  </body>
+</html>
