@@ -14,6 +14,8 @@ ctx.fillStyle="#ff0000" //red
 //ctx.fillRect(50,50,100,200)
 var can = c.getBoundingClientRect();
 var shape = "rect";
+
+// Variables storing location of the last dot.
 var lastX = 0;
 var lastY = 0;
 
