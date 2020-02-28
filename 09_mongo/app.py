@@ -1,20 +1,36 @@
 from pymongo import MongoClient
 from pprint import pprint
-import datetime
+from bson.json_util import loads
 import json
+import datetime
+
+
 client = MongoClient()
 db = client.test
 restaurants = db.restaurants
 
 
-with open("./primer-dataset.json", 'r') as file:
-    result = restaurants.insert_many(file)
-        # pprint(data)
+def findByZip(zip): 
+        for restaurant in restaurants.find({"address.zipcode" : str(zip)}):
+                print(restaurant["name"])        
 
-# post = {"author": "Mike",
-#         "text": "My first blog post!",
-#         "tags": ["mongodb", "python", "pymongo"],
-#         "date": datetime.datetime.utcnow()}
+    
+def findByBorough(borough):
+        for restaurant in restaurants.find({"borough": borough}):
+                print(restaurant["name"])
 
-print(result)
-# pprint(posts.find_one())
+
+def findByZipWithScoreCap(zip, score):
+        for restaurant in restaurants.find({"address.zipcode" : str(zip), "grades.score": {"$lt": score}}):
+                print(restaurant["name"])
+
+
+def findByZipAndGrade(zip, grade):
+        for restaurant in restaurants.find({"address.zipcode" :str(zip), "grades.grade": grade}):
+                print(restaurant["name"])
+
+                      
+#findByZip(11234)
+#findByBorough("Bronx")
+#findByZipWithScoreCap(10280, 8)
+#findByZipAndGrade(10280, "C")
