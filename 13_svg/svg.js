@@ -12,8 +12,8 @@ var clear = function(e) {
     while (pic.lastChild) {
         pic.removeChild(pic.lastChild);
     }
-
 };
+
 var plot = function(e) {
     var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     e.offsetX;
