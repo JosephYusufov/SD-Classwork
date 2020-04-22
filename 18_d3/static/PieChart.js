@@ -1,3 +1,9 @@
+// NoBrim
+// Joseph Yusufov
+// Ahmed Sultan
+// Vishwaa Sofat
+// 2020 - 04 - 22
+
 fetch("https://data.cityofnewyork.us/api/views/ihfw-zy9j/rows.json?accessType=DOWNLOAD")
     .then(response => {
         return response.json();
