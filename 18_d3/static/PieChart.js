@@ -4,14 +4,8 @@ fetch("https://data.cityofnewyork.us/api/views/ihfw-zy9j/rows.json?accessType=DO
     }).then((data) => {
         process(data);
     });
-var width = 500;
-var height = 500;
 
 const process = (data) => {
-    // const p = d3.selectAll("p");
-    // console.log(p);
-    // console.log(data);
-
     // HELPER FUNCTIONS
     const getByYear = (schoolYear) => data.data.filter(datum => datum[10] == schoolYear)
 
@@ -26,39 +20,104 @@ const process = (data) => {
     }
 
     const getRaceSummary = (data) => {
-        const summary = {    
-            asian: getPercentageByRace('a', data),
-            black: getPercentageByRace('b', data),
-            hispanic: getPercentageByRace('h', data),
-            white: getPercentageByRace('w', data),
-        } 
-        summary['sum'] = d3.sum(Object.values(summary));
+        const summary = [    
+            { group: 'Asian', value: getPercentageByRace('a', data)},
+            { group: 'Black', value: getPercentageByRace('b', data) },
+            { group: 'Hispanic', value: getPercentageByRace('h', data) },
+            { group: 'White', value: getPercentageByRace('w', data) },
+        ]
+        // summary['sum'] = d3.sum(Object.values(summary));
         return summary;
     };
 
-    console.log(getRaceSummary(getByYear('20102011')));
-    // console.log(getPercentageByRace('w', getByYear('20052006')))
-    // console.log();
-//     const pie = d3.pie()
-//         .sort(null)
-//         .value(d => d.value);
+    var race1 = getRaceSummary(getByYear('20102011'));
 
-//     const arcLabel = () => {
-//         const radius = math.min(width, height) / 2 * 0.8;
-//         return d3.arc().innerRadius(radius).outerRadius(radius);
-//     };
+    ///////////
+    ///////////
+    ///////////
 
-//     const arc = d3.arc()
-//         .innerRadius(0)
-//         .outerRadius(Math.min(width, height) / 2 - 1);
+    // set the dimensions and margins of the graph
+    var margin = { top: 30, right: 30, bottom: 70, left: 60 },
+        width = 460 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
 
-//     const color = d3.scaleOrdinal()
-//         .domain(data.map(d => d.name))
-//         .range(d3.quantize(t => d3.interpolateSpectral(t * 0.8 + 0.1), data.length).reverse());
+    // append the svg object to the body of the page
+    var svg = d3.select("#my_dataviz")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+    // X axis
+    var x = d3.scaleBand()
+        .range([0, width])
+        .domain(race1.map(function (d) { return d.group; }))
+        .padding(0.2);
+    svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x))
+
+    // Add Y axis
+    var y = d3.scaleLinear()
+        .domain([0, 50])
+        .range([height, 0]);
+    svg.append("g")
+        .attr("class", "myYaxis")
+        .call(d3.axisLeft(y));
+
+    var currentYear = 0;
+    var yearObj = {
+        0: '20052006',
+        1: '20062007',
+        2: '20072008',
+        3: '20082009',
+        4: '20092010',
+        5: '20102011',
+        6: '20112012'
+    };
+    const render = document.getElementById('render').addEventListener('click', () => {
+        update(getRaceSummary(getByYear(yearObj[currentYear])));
+        document.getElementById('year').innerHTML = yearObj[currentYear];
+    });
+
+    const nextButton = document.getElementById('next').addEventListener('click', () => {
+        if(currentYear != 6){
+            currentYear++;
+            update(getRaceSummary(getByYear(yearObj[currentYear])));
+            document.getElementById('year').innerHTML = yearObj[currentYear];
+        };
+    });
+    const lastButton = document.getElementById('last').addEventListener('click', () => {
+        if (currentYear != 0) {
+            currentYear--;
+            update(getRaceSummary(getByYear(yearObj[currentYear])));
+            document.getElementById('year').innerHTML = yearObj[currentYear];
+        };
+    });
+
+    function update(data) {
+
+        var u = svg.selectAll("rect")
+            .data(data)
+
+        u
+            .enter()
+            .append("rect")
+            .merge(u)
+            .transition()
+            .duration(500)
+            .attr("x", function (d) { return x(d.group); })
+            .attr("y", function (d) { return y(d.value); })
+            .attr("width", x.bandwidth())
+            .attr("height", function (d) { return height - y(d.value); })
+            .attr("fill",  ('#' + Math.floor(Math.random() * 16777215).toString(16)))
+        
+        console.log(data);
+    }
+
+    // Initialize the plot with the first dataset
 };
 
-
-
-// d3.json('https://data.cityofnewyork.us/api/views/ihfw-zy9j/rows.json?accessType=DOWNLOAD', 
-//     data => process(data));
 
