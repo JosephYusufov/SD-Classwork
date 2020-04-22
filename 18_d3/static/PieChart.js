@@ -8,7 +8,14 @@ fetch("https://data.cityofnewyork.us/api/views/ihfw-zy9j/rows.json?accessType=DO
 const process = (data) => {
     // HELPER FUNCTIONS
     const getByYear = (schoolYear) => data.data.filter(datum => datum[10] == schoolYear)
-
+    const filterByDistrict = (district, data) => {
+        return(data.filter(datum => {
+            // console.log(datum[8]);
+            return(datum[8].substring(0,2) == district);
+        }));
+    };
+    // console.log(data.data)
+    // console.log(filterByDistrict('01', getByYear('20052006')))
     const getPercentageByRace = (race, data) => {
         const raceIndex = (raceParam => ({
                 'a': 35,
@@ -30,7 +37,10 @@ const process = (data) => {
         return summary;
     };
 
+
     var race1 = getRaceSummary(getByYear('20102011'));
+
+    console.log(getRaceSummary(filterByDistrict('06', getByYear('20072008'))));
 
     ///////////
     ///////////
@@ -38,8 +48,8 @@ const process = (data) => {
 
     // set the dimensions and margins of the graph
     var margin = { top: 30, right: 30, bottom: 70, left: 60 },
-        width = 460 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+        width = 700 - margin.left - margin.right,
+        height = 600 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
     var svg = d3.select("#my_dataviz")
@@ -61,13 +71,14 @@ const process = (data) => {
 
     // Add Y axis
     var y = d3.scaleLinear()
-        .domain([0, 50])
+        .domain([0, 75])
         .range([height, 0]);
     svg.append("g")
         .attr("class", "myYaxis")
         .call(d3.axisLeft(y));
 
     var currentYear = 0;
+    var currentDistrict = '01';
     var yearObj = {
         0: '20052006',
         1: '20062007',
@@ -77,24 +88,31 @@ const process = (data) => {
         5: '20102011',
         6: '20112012'
     };
+
     const render = document.getElementById('render').addEventListener('click', () => {
-        update(getRaceSummary(getByYear(yearObj[currentYear])));
+        update(getRaceSummary(filterByDistrict(currentDistrict, getByYear(yearObj[currentYear]))));
         document.getElementById('year').innerHTML = yearObj[currentYear];
     });
 
     const nextButton = document.getElementById('next').addEventListener('click', () => {
         if(currentYear != 6){
             currentYear++;
-            update(getRaceSummary(getByYear(yearObj[currentYear])));
+            update(getRaceSummary(filterByDistrict(currentDistrict, getByYear(yearObj[currentYear]))));
             document.getElementById('year').innerHTML = yearObj[currentYear];
         };
     });
     const lastButton = document.getElementById('last').addEventListener('click', () => {
         if (currentYear != 0) {
             currentYear--;
-            update(getRaceSummary(getByYear(yearObj[currentYear])));
+            update(getRaceSummary(filterByDistrict(currentDistrict, getByYear(yearObj[currentYear]))));
             document.getElementById('year').innerHTML = yearObj[currentYear];
         };
+    });
+
+    const selectDistrict = document.getElementById('district-select').addEventListener('change', (e) => {
+        currentDistrict = e.target.options[e.target.selectedIndex].innerHTML;
+        console.log(currentDistrict);
+        update(getRaceSummary(filterByDistrict(currentDistrict, getByYear(yearObj[currentYear]))));
     });
 
     function update(data) {
